@@ -1,20 +1,52 @@
 Vagrant.configure("2") do |config|
 
-    config.vm.define :apache do |web|
-        
-        web.vm.box = "ubuntu/xenial64"
-        web.vm.hostname = "srv-web"
-        web.vm.network :forwarded_port, guest: 80, host: 4567
-        web.vm.network "private_network" , ip: "192.168.1.25"
-        config.vm.provider "virtualbox" do|vb|
-            vb.memory = "1024"
-            vb.name  = "WEB"
-            vb.cpus = "1"
+config.vm.define "WEB" do |subconfig|
+
+
+    subconfig.vm.box = "ubuntu/xenial64"
+  
+    subconfig.vm.box_check_update = false
+  
+    subconfig.vm.network "private_network", ip: "192.168.1.10"
+  
+      subconfig.vm.provider "virtualbox" do |vb|
+  
+       vb.gui = false
+  
+       vb.memory = "1024"
+       vb.cpus = "2"
+    end
+  
+    subconfig.vm.provision "shell", inline: <<-SHELL
+       apt-get update
+       apt-get install -y apache2
+        SHELL
+  end
+  config.vm.define "db" do |subconfig|
+   
+      subconfig.vm.box = "ubuntu/xenial64"
+  
+    subconfig.vm.box_check_update = false
+ 
+    subconfig.vm.network "private_network", ip: "192.168.1.11"
+    subconfig.disksize.size = "50GB"
+ 
+         subconfig.vm.provider "virtualbox" do |vb|
+ 
+       vb.gui = false
+ 
+         vb.memory = "1024"
+         vb.cpus = "2"
+     end 
+
+     subconfig.vm.provision "shell", inline: <<-SHELL
+          apt-get update
+         sudo apt-get install mysql-server
+
+      SHELL
+   end   
+
+
 
 
 end
-
-config.vm.provision  :shell, inline: <<-SHELL 
-    sudo apt-get update
-    sudo apt-get -y install apache2
-SHELL

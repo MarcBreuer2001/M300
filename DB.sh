@@ -1,4 +1,4 @@
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password '
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password S3cr3tp4ssw0rd'
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password S3cr3tp4ssw0rd'
 
 # Installation MYSQL

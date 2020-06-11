@@ -17,3 +17,8 @@
        sudo a2enconf adminer.conf 
        sudo service apache2 restart 
       echo '127.0.0.1 localhost web01\n192.168.36.100 DB001' > /etc/hosts
+
+      sudo apt-get install ufw
+      sudo ufw enable
+      sudo ufw allow 80/tcp
+      

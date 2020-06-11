@@ -26,6 +26,28 @@
 
 Der Zugriff auf die Datenbank ist nur vom Webserver möglich. Der sonstige Zugriff auf die Datenbank ist unterdrückt. Der Root User wurde auf dem DB Server Deaktiviert. Zugriff nur noch mit Persöndlichem Admin möglich. (für genauere Infos Vagrantfile anschauen.)
 
+### UFW einrichten 
+
+Die Einrichtung von der UFW ist ganz simpel. die FW muss zuerst mit folgendem befehl installiert werden: 
+$  sudo apt-get install ufw
+
+Nach der installation des UFW muss mann diese dann auch noch aktivieren. Dies geschiet mit folgendem Befehl. 
+
+$  sudo ufw enable
+
+Danach kann mann anfangen Regeln zu definieren. der Nächste Command erstellt eine Regel für alle. Sprich er öffnet nur den Port zum Server.
+
+$  sudo ufw allow 80/tcp
+
+Hier öffne ich den Port 80 über das TCP Protokoll. 
+Mann kann aber auch noch genauer Bestimmen wie und von welcher IP die Prots geöffnet werden z.b. Verbindung vom DB Server zum Web Server. Damit nur der Webserver auf die DB zugreifen kann. 
+Hier ein Beispiel: 
+
+$ sudo ufw allow from "IP Adresse oder Netzt"  to any port 22
+
+Hier sagen wir dass von eine Bestimmten IP oder Netz auf den Port 22 zugeriffen werden darf. 
+
+
 
 ## Multi VM Vagrantfile Config
 
@@ -58,6 +80,10 @@ Das Vagrantfile ist so aufgebaut, dass die Provisionierung in einem Shell Script
 |Root Deaktiviert |    Ja     |
 
 Die Oben Ausgeführten Tests wurden alle mit "Ja" Bestätigt somit funktioniert die Umgebung einwandfrei.
+
+
+
+
 
 
 

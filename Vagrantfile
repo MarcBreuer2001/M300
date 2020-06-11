@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
             end
     
          db.vm.hostname = "DB001"
-          db.vm.network "private_network", ip: "192.168.1.100"
+          db.vm.network "private_network", ip: "192.168.36.100"
           #Provisionierung Services in shell Script
          db.vm.provision "shell", path: "DB.sh"
       end
@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
       config.vm.define "web" do |web|
       web.vm.box = "ubuntu/xenial64"
       web.vm.hostname = "web001"
-      web.vm.network "private_network", ip:"192.168.1.101" 
+      web.vm.network "private_network", ip:"192.168.36.101" 
       web.vm.network "forwarded_port", guest:80, host:8080, auto_correct: true
       
       web.vm.provider "virtualbox" do |vb|

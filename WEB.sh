@@ -16,4 +16,4 @@
 
        sudo a2enconf adminer.conf 
        sudo service apache2 restart 
-      echo '127.0.0.1 localhost web01\n192.168.1.100 DB001' > /etc/hosts
+      echo '127.0.0.1 localhost web01\n192.168.36.100 DB001' > /etc/hosts

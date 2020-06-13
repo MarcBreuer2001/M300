@@ -14,5 +14,13 @@ mysql -uroot -pS3cr3tp4ssw0rd <<%EOF%
 	FLUSH PRIVILEGES;
 %EOF%
 
+#FW Config für DB
+   sudo apt-get install ufw
+   sudo ufw enable
+#Ganzer Verkehr auf 3306/TCP blocken 
+   sudo ufw deny 3306/tcp
+#Nur vom WebServer access zulassen. 
+   sudo ufw allow from 192.168.36.101 to any port 3306
+
 # Restart SQL Service 
 sudo service mysql restart
